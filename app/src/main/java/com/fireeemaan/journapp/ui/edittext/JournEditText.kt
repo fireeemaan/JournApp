@@ -35,7 +35,6 @@ class JournEditText @JvmOverloads constructor(
                     InputMode.DEFAULT -> error = null
                 }
             }
-
         }
 
         updateInputType()

@@ -1,4 +1,4 @@
-package com.fireeemaan.journapp.data.retrofit
+package com.fireeemaan.journapp.data.retrofit.auth
 
 import com.fireeemaan.journapp.data.response.LoginResponse
 import com.fireeemaan.journapp.data.response.RegisterResponse

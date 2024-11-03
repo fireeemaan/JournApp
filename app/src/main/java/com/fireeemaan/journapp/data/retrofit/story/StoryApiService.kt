@@ -1,6 +1,5 @@
-package com.fireeemaan.journapp.data.retrofit
+package com.fireeemaan.journapp.data.retrofit.story
 
-import androidx.room.Query
 import com.fireeemaan.journapp.data.response.DetailStoryResponse
 import com.fireeemaan.journapp.data.response.StoriesResponse
 import okhttp3.MultipartBody

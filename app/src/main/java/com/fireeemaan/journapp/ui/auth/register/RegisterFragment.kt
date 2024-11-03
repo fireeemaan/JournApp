@@ -1,4 +1,4 @@
-package com.fireeemaan.journapp.ui.register
+package com.fireeemaan.journapp.ui.auth.register
 
 import android.os.Bundle
 import android.text.Spannable
@@ -14,6 +14,8 @@ import androidx.core.text.set
 import androidx.navigation.fragment.findNavController
 import com.fireeemaan.journapp.R
 import com.fireeemaan.journapp.databinding.FragmentRegisterBinding
+import com.fireeemaan.journapp.ui.button.JournButton
+import com.fireeemaan.journapp.ui.edittext.JournEditText
 
 
 class RegisterFragment : Fragment() {
@@ -22,10 +24,11 @@ class RegisterFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var tvToLogin: TextView
+    private lateinit var edName: JournEditText
+    private lateinit var edEmail: JournEditText
+    private lateinit var edPassword: JournEditText
+    private lateinit var btnRegister: JournButton
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +42,14 @@ class RegisterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         tvToLogin = binding.tvToLogin
+        edName = binding.edRegisterName
+        edEmail = binding.edRegisterEmail
+        edPassword = binding.edRegisterPassword
+        btnRegister = binding.btnRegister
+
+        edName.hint = "Enter Your Name"
+        edEmail.inputMode = JournEditText.InputMode.EMAIL
+        edPassword.inputMode = JournEditText.InputMode.PASSWORD
 
         val spannableString = SpannableString(tvToLogin.text)
 
@@ -56,5 +67,8 @@ class RegisterFragment : Fragment() {
         tvToLogin.text = spannableString
         tvToLogin.movementMethod = LinkMovementMethod.getInstance()
 
+        btnRegister.setOnClickListener {
+            
+        }
     }
 }
