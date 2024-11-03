@@ -17,7 +17,7 @@ class RegisterViewModel(
 ) : ViewModel() {
 
     private val _registerResponse = MutableLiveData<Result<RegisterResponse>>()
-    private val registerResponse: LiveData<Result<RegisterResponse>> get() = _registerResponse
+    val registerResponse: LiveData<Result<RegisterResponse>> get() = _registerResponse
 
     fun register(name: String, email: String, password: String) {
         viewModelScope.launch {

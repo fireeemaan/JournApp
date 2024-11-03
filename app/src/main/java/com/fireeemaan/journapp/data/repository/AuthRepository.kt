@@ -5,6 +5,9 @@ import com.fireeemaan.journapp.data.response.LoginResponse
 import com.fireeemaan.journapp.data.response.RegisterResponse
 import com.fireeemaan.journapp.data.retrofit.auth.AuthApiService
 import com.fireeemaan.journapp.data.Result
+import com.fireeemaan.journapp.data.response.ErrorResponse
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 class AuthRepository(private val authApiService: AuthApiService) {
     suspend fun login(email: String, password: String): Result<LoginResponse> {
@@ -15,8 +18,10 @@ class AuthRepository(private val authApiService: AuthApiService) {
                     Result.Success(loginResponse)
                 } ?: Result.Error("Empty Response")
             } else {
-                Log.e("LOGINNN", "login: ${response.body()?.message}")
-                Result.Error("Login Failed. Try again later.")
+                val type = object : TypeToken<ErrorResponse>() {}.type
+                val errorResponse: ErrorResponse? =
+                    Gson().fromJson(response.errorBody()?.charStream(), type)
+                Result.Error(errorResponse?.message ?: "Login Failed. Try again later.")
             }
         } catch (e: Exception) {
             Result.Error("Something went wrong.")
@@ -35,7 +40,10 @@ class AuthRepository(private val authApiService: AuthApiService) {
                     Result.Success(registerResponse)
                 } ?: Result.Error("Empty Response")
             } else {
-                Result.Error("Register Failed. Try again later.")
+                val type = object : TypeToken<ErrorResponse>() {}.type
+                val errorResponse: ErrorResponse? =
+                    Gson().fromJson(response.errorBody()?.charStream(), type)
+                Result.Error(errorResponse?.message ?: "Login Failed. Try again later.")
             }
         } catch (e: Exception) {
             Result.Error("Something went wrong.")

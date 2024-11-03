@@ -1,12 +1,10 @@
 package com.fireeemaan.journapp.ui.auth.login
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.SpannableString
 import android.text.Spanned
-import android.text.TextPaint
 import android.text.TextWatcher
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
@@ -36,7 +34,6 @@ class LoginFragment : Fragment() {
     private lateinit var edPassword: JournEditText
     private lateinit var tvToRegister: TextView
     private lateinit var btnLogin: JournButton
-    private lateinit var progressBar: ProgressBar
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
@@ -58,6 +55,8 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        checkLoginStatus()
 
         tvToRegister = binding.tvToRegister
         edPassword = binding.edLoginPassword
@@ -84,29 +83,8 @@ class LoginFragment : Fragment() {
         tvToRegister.text = spannableString
         tvToRegister.movementMethod = LinkMovementMethod.getInstance()
 
-        edEmail.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
-
-            override fun afterTextChanged(s: Editable) {
-                checkTextError()
-            }
-        })
-
-        edPassword.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
-
-            override fun afterTextChanged(s: Editable) {
-                checkTextError()
-            }
-        })
+        edEmail.addTextChangedListener(createTextWatcher())
+        edPassword.addTextChangedListener(createTextWatcher())
 
         loginViewModel.loginResult.observe(viewLifecycleOwner) { result ->
             when (result) {
@@ -117,6 +95,7 @@ class LoginFragment : Fragment() {
                 is Result.Success -> {
                     setButtonState(isEnabled = true)
                     val token = result.data.loginResult.token
+                    loginViewModel.saveAuthToken(token)
                     val intent = Intent(requireContext(), StoryActivity::class.java)
                     startActivity(intent)
                     requireActivity().finish()
@@ -144,6 +123,30 @@ class LoginFragment : Fragment() {
 
     }
 
+    private fun createTextWatcher(): TextWatcher {
+        return object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+
+            override fun afterTextChanged(s: Editable) {
+                checkTextError()
+            }
+        }
+    }
+
+    private fun checkLoginStatus() {
+        loginViewModel.getAuthToken().observe(viewLifecycleOwner) { token ->
+            if (token.isNotEmpty()) {
+                val intent = Intent(requireContext(), StoryActivity::class.java)
+                startActivity(intent)
+                requireActivity().finish()
+            }
+        }
+    }
+
     private fun checkTextError() {
         val isEmailEmpty = edEmail.text.isNullOrEmpty()
         val isPasswordEmpty = edPassword.text.isNullOrEmpty()
@@ -153,7 +156,6 @@ class LoginFragment : Fragment() {
         } else {
             setButtonState(isEnabled = true)
         }
-
     }
 
     private fun setButtonState(isEnabled: Boolean, isLoading: Boolean = false) {
@@ -163,7 +165,6 @@ class LoginFragment : Fragment() {
         } else {
             binding.progressBar.visibility = View.GONE
         }
-
     }
 
     private fun showToast(message: String) {

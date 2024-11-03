@@ -3,6 +3,7 @@ package com.fireeemaan.journapp.ui.auth.login
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.fireeemaan.journapp.data.repository.AuthRepository
 import com.fireeemaan.journapp.data.response.LoginResponse
@@ -28,5 +29,15 @@ class LoginViewModel(
             }
             _loginResult.postValue(result)
         }
+    }
+
+    fun saveAuthToken(token: String) {
+        viewModelScope.launch {
+            authPref.saveAuthToken(token)
+        }
+    }
+
+    fun getAuthToken(): LiveData<String> {
+        return authPref.getAuthToken().asLiveData()
     }
 }
