@@ -1,5 +1,6 @@
 package com.fireeemaan.journapp.ui.story.list
 
+import android.content.Intent
 import androidx.fragment.app.viewModels
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -19,12 +20,16 @@ import com.fireeemaan.journapp.database.story.StoryEntity
 import com.fireeemaan.journapp.databinding.FragmentListStoryBinding
 import com.fireeemaan.journapp.ui.adapter.ListStoryAdapter
 import com.fireeemaan.journapp.ui.story.StoryViewModelFactory
+import com.fireeemaan.journapp.ui.story.add.AddStoryActivity
+import com.fireeemaan.journapp.ui.story.camera.CameraActivity
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ListStoryFragment : Fragment() {
 
     private lateinit var storyRecyclerView: RecyclerView
     private lateinit var storyAdapter: ListStoryAdapter
     private lateinit var progressBar: ProgressBar
+    private lateinit var fabAddStory: FloatingActionButton
 
     private var _binding: FragmentListStoryBinding? = null
     private val binding get() = _binding!!
@@ -49,6 +54,7 @@ class ListStoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         progressBar = binding.progressBar
+        fabAddStory = binding.fabAddStory
 
         storyAdapter = ListStoryAdapter { storyId ->
             val action =
@@ -60,6 +66,11 @@ class ListStoryFragment : Fragment() {
 
         storyRecyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+
+        fabAddStory.setOnClickListener {
+            val intent = Intent(requireActivity(), CameraActivity::class.java)
+            startActivity(intent)
+        }
 
         showLoading(true)
         observeData()

@@ -12,7 +12,9 @@
         tools:layout="@layout/fragment_list_story">
         <action
             android:id="@+id/action_listStoryFragment_to_detailStoryFragment"
-            app:destination="@id/detailStoryFragment" />
+            app:destination="@id/detailStoryFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/detailStoryFragment"
@@ -21,7 +23,9 @@
         tools:layout="@layout/fragment_detail_story">
         <action
             android:id="@+id/action_detailStoryFragment_to_listStoryFragment"
-            app:destination="@id/listStoryFragment" />
+            app:destination="@id/listStoryFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right" />
         <argument
             android:name="storyId"
             app:argType="string" />

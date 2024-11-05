@@ -16,4 +16,8 @@
     <string name="name">Name</string>
     <string name="item_description">Item Description</string>
     <string name="time_and_date">Time and Date</string>
+    <string name="add_story_button">Add Story Button</string>
+    <string name="gallery">Gallery</string>
+    <string name="take_photo">Take Photo</string>
+    <string name="describe_your_journey">Describe your journey!</string>
 </resources>
