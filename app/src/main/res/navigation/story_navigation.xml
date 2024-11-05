@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/story_navigation"
+    app:startDestination="@id/listStoryFragment">
+
+    <fragment
+        android:id="@+id/listStoryFragment"
+        android:name="com.fireeemaan.journapp.ui.story.list.ListStoryFragment"
+        android:label="fragment_list_story"
+        tools:layout="@layout/fragment_list_story">
+        <action
+            android:id="@+id/action_listStoryFragment_to_detailStoryFragment"
+            app:destination="@id/detailStoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailStoryFragment"
+        android:name="com.fireeemaan.journapp.ui.story.detail.DetailStoryFragment"
+        android:label="fragment_detail_story"
+        tools:layout="@layout/fragment_detail_story">
+        <action
+            android:id="@+id/action_detailStoryFragment_to_listStoryFragment"
+            app:destination="@id/listStoryFragment" />
+        <argument
+            android:name="storyId"
+            app:argType="string" />
+    </fragment>
+</navigation>

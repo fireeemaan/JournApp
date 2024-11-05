@@ -12,4 +12,8 @@
     <string name="register_text">Register</string>
     <string name="to_register_text">Don\'t have an account? <b>Register Now!</b> </string>
     <string name="to_login_text">Already have an account? <b>Login Now!</b></string>
+    <string name="story_image">Story Image</string>
+    <string name="name">Name</string>
+    <string name="item_description">Item Description</string>
+    <string name="time_and_date">Time and Date</string>
 </resources>

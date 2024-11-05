@@ -14,7 +14,7 @@ interface StoryDao {
     suspend fun getAllStories(): List<StoryEntity>
 
     @Query("SELECT * FROM story WHERE id = :id")
-    suspend fun getStoryById(id: Int): StoryEntity
+    suspend fun getStoryById(id: String): StoryEntity?
 
     @Query("DELETE FROM story")
     suspend fun deleteAll()

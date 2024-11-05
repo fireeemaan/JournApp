@@ -49,4 +49,36 @@
         <item name="colorSurfaceContainerHigh">@color/md_theme_surfaceContainerHigh</item>
         <item name="colorSurfaceContainerHighest">@color/md_theme_surfaceContainerHighest</item>
     </style>
+
+    <!--    Base Text Style-->
+    <style name="BaseTitle">
+        <item name="android:textColor">@color/md_theme_onPrimaryContainer</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:drawableTint">@color/md_theme_onPrimaryContainer</item>
+    </style>
+
+    <style name="BaseSupportingText">
+        <item name="android:drawableTint">@color/md_theme_onPrimaryContainer</item>
+        <item name="android:textColor">@color/md_theme_onPrimaryContainer</item>
+    </style>
+
+    <!--    Card Style-->
+    <style name="Card.Title" parent="BaseTitle">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Card.SupportingText" parent="BaseSupportingText">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <!--    Detail Style-->
+    <style name="Detail.Title" parent="BaseTitle">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="Detail.SupportingText" parent="BaseSupportingText">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+
 </resources>
