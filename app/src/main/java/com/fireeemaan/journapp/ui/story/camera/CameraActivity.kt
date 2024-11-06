@@ -9,11 +9,17 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.provider.MediaStore
 import android.util.Log
+import android.view.OrientationEventListener
+import android.view.Surface
+import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
@@ -28,11 +34,14 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.fireeemaan.journapp.R
 import com.fireeemaan.journapp.databinding.ActivityCameraBinding
+import com.fireeemaan.journapp.ui.button.JournButton
 import com.fireeemaan.journapp.ui.story.add.AddStoryActivity
+import com.fireeemaan.journapp.utils.Utils.compressImage
 import java.io.ByteArrayOutputStream
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import com.fireeemaan.journapp.utils.Utils.createCustomTempFile
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.concurrent.TimeUnit
 
 class CameraActivity : AppCompatActivity() {
@@ -42,8 +51,9 @@ class CameraActivity : AppCompatActivity() {
     private var imageCapture: ImageCapture? = null
     private lateinit var cameraExecutor: ExecutorService
 
-    private lateinit var btnTakePhoto: Button
+    private lateinit var btnTakePhoto: JournButton
     private lateinit var previewView: PreviewView
+    private lateinit var fabGallery: FloatingActionButton
 
     private val activityResultLauncher =
         registerForActivityResult(
@@ -66,6 +76,44 @@ class CameraActivity : AppCompatActivity() {
             }
         }
 
+    private val orientationEventListener by lazy {
+        object : OrientationEventListener(this) {
+            override fun onOrientationChanged(orientation: Int) {
+                if (orientation == ORIENTATION_UNKNOWN) {
+                    return
+                }
+
+                val rotation = when (orientation) {
+                    in 45 until 135 -> Surface.ROTATION_270
+                    in 135 until 225 -> Surface.ROTATION_180
+                    in 225 until 315 -> Surface.ROTATION_90
+                    else -> Surface.ROTATION_0
+                }
+
+                imageCapture?.targetRotation = rotation
+            }
+
+        }
+    }
+
+    private val launcherGallery = registerForActivityResult(
+        ActivityResultContracts.PickVisualMedia()
+    ) { uri: Uri? ->
+        uri?.let {
+            val intent = Intent(this@CameraActivity, AddStoryActivity::class.java)
+            intent.putExtra(AddStoryActivity.EXTRA_IMAGE_URI, uri)
+            addStoryActivityLauncher.launch(intent)
+        } ?: run {
+            Toast.makeText(this, "No image selected", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private val addStoryActivityLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+        finish()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -73,6 +121,8 @@ class CameraActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         previewView = binding.previewView
+        btnTakePhoto = binding.btnTakePhoto
+        fabGallery = binding.fabGallery
 
         if (allPermissionGranted()) {
             startCamera()
@@ -80,12 +130,21 @@ class CameraActivity : AppCompatActivity() {
             requestPermission()
         }
 
-        binding.btnTakePhoto.setOnClickListener {
+        btnTakePhoto.setOnClickListener {
             takePhoto()
         }
 
-        cameraExecutor = Executors.newSingleThreadExecutor()
+        fabGallery.setOnClickListener {
+            startGallery()
+        }
 
+
+        cameraExecutor = Executors.newSingleThreadExecutor()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        showLoading(false)
     }
 
     private fun startCamera() {
@@ -112,6 +171,8 @@ class CameraActivity : AppCompatActivity() {
                 cameraProvider.bindToLifecycle(
                     this, cameraSelector, preview, imageCapture
                 )
+
+                orientationEventListener.enable()
             } catch (e: Exception) {
                 Log.e("CameraX", "Something went wrong!")
             }
@@ -119,7 +180,7 @@ class CameraActivity : AppCompatActivity() {
     }
 
     private fun takePhoto() {
-        Log.e("Kamera", "onCreate: TEST!!!!!")
+        showLoading(true)
         val imageCapture = imageCapture ?: return
 
         val photoFile = createCustomTempFile(application)
@@ -131,9 +192,14 @@ class CameraActivity : AppCompatActivity() {
             ContextCompat.getMainExecutor(this),
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
+                    compressImage(photoFile, maxSizeKB = 500)
+
+                    showLoading(false)
+
                     val intent = Intent(this@CameraActivity, AddStoryActivity::class.java)
                     intent.putExtra(AddStoryActivity.EXTRA_IMAGE_URI, Uri.fromFile(photoFile))
                     startActivity(intent)
+                    finish()
                 }
 
 
@@ -143,10 +209,8 @@ class CameraActivity : AppCompatActivity() {
             })
     }
 
-    private fun Bitmap.toByteArray(): ByteArray {
-        val stream = ByteArrayOutputStream()
-        compress(Bitmap.CompressFormat.JPEG, 100, stream)
-        return stream.toByteArray()
+    private fun startGallery() {
+        launcherGallery.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
     }
 
     private fun allPermissionGranted() = REQUIRED_PERMISSIONS.all {
@@ -160,6 +224,16 @@ class CameraActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         cameraExecutor.shutdown()
+        orientationEventListener.disable()
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        with(binding) {
+            btnTakePhoto.isEnabled = !isLoading
+            btnTakePhoto.isClickable = !isLoading
+            progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+            btnTakePhoto.text = if (isLoading) "" else getString(R.string.take_photo)
+        }
     }
 
     companion object {

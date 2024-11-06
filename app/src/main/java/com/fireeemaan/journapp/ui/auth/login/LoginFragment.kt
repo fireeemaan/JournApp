@@ -160,6 +160,7 @@ class LoginFragment : Fragment() {
 
     private fun setButtonState(isEnabled: Boolean, isLoading: Boolean = false) {
         btnLogin.isEnabled = isEnabled
+        btnLogin.isClickable = isEnabled
         if (isLoading) {
             binding.progressBar.visibility = View.VISIBLE
         } else {

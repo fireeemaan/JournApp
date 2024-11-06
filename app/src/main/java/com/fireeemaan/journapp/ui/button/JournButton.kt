@@ -62,7 +62,6 @@ class JournButton : AppCompatButton {
                     .scaleY(1f)
                     .setDuration(100)
                     .start()
-                performClick()
             }
 
             MotionEvent.ACTION_CANCEL -> {

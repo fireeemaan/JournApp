@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -56,6 +58,8 @@ class ListStoryFragment : Fragment() {
         progressBar = binding.progressBar
         fabAddStory = binding.fabAddStory
 
+        (activity as? AppCompatActivity)?.supportActionBar?.show()
+
         storyAdapter = ListStoryAdapter { storyId ->
             val action =
                 ListStoryFragmentDirections.actionListStoryFragmentToDetailStoryFragment(storyId)
@@ -70,14 +74,23 @@ class ListStoryFragment : Fragment() {
         fabAddStory.setOnClickListener {
             val intent = Intent(requireActivity(), CameraActivity::class.java)
             startActivity(intent)
+            requireActivity().finish()
         }
+
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    requireActivity().finish()
+                }
+            })
 
         showLoading(true)
         observeData()
     }
 
     private fun observeData() {
-        viewModel.getAllStores().observe(viewLifecycleOwner) { result ->
+        viewModel.getAllStories().observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Result.Loading -> {
                     showLoading(true)
@@ -95,6 +108,33 @@ class ListStoryFragment : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        (activity as? AppCompatActivity)?.supportActionBar?.show()
+
+        viewModel.getAllStories().observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Loading -> showLoading(true)
+                is Result.Success -> {
+                    showLoading(false)
+                    setData(result.data)
+                }
+
+                is Result.Error -> {
+                    showLoading(false)
+                    Toast.makeText(context, "Error: ${result.error}", Toast.LENGTH_SHORT).show()
+                    setData(emptyList())
+                }
+            }
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        (activity as? AppCompatActivity)?.supportActionBar?.hide()
     }
 
     private fun showLoading(isLoading: Boolean) {

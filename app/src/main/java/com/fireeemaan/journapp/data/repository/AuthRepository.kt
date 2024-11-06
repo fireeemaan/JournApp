@@ -46,7 +46,7 @@ class AuthRepository(private val authApiService: AuthApiService) {
                 Result.Error(errorResponse?.message ?: "Login Failed. Try again later.")
             }
         } catch (e: Exception) {
-            Result.Error("Something went wrong.")
+            Result.Error("Unexpected Error : ${e.message}")
         }
     }
 

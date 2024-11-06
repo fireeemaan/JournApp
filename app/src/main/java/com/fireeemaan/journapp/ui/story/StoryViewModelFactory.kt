@@ -1,13 +1,12 @@
 package com.fireeemaan.journapp.ui.story
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.fireeemaan.journapp.data.datastore.TokenDataStore
-import com.fireeemaan.journapp.data.datastore.dataStore
 import com.fireeemaan.journapp.data.repository.StoryRepository
 import com.fireeemaan.journapp.di.Injection
+import com.fireeemaan.journapp.ui.story.add.AddStoryViewModel
 import com.fireeemaan.journapp.ui.story.detail.DetailStoryViewModel
 import com.fireeemaan.journapp.ui.story.list.ListStoryViewModel
 import kotlinx.coroutines.flow.first
@@ -26,6 +25,14 @@ class StoryViewModelFactory private constructor(
 
             modelClass.isAssignableFrom(DetailStoryViewModel::class.java) -> {
                 DetailStoryViewModel(storyRepository) as T
+            }
+
+            modelClass.isAssignableFrom(AddStoryViewModel::class.java) -> {
+                AddStoryViewModel(storyRepository) as T
+            }
+
+            modelClass.isAssignableFrom(StoryViewModel::class.java) -> {
+                StoryViewModel(authPref) as T
             }
 
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")

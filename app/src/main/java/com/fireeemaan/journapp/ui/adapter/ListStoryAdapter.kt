@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.fireeemaan.journapp.database.story.StoryEntity
 import com.fireeemaan.journapp.databinding.ItemListBinding
-import com.fireeemaan.journapp.ui.story.list.ListStoryViewModel
+import com.fireeemaan.journapp.utils.Utils.formatDateTime
 
 class ListStoryAdapter(
     private val onItemClicked: (String) -> Unit
@@ -22,7 +22,7 @@ class ListStoryAdapter(
         fun bind(story: StoryEntity) {
             with(binding) {
                 tvItemName.text = story.name
-                tvItemTime.text = story.createdAt
+                tvItemTime.text = formatDateTime(story.createdAt)
                 tvItemDescription.text = story.description
 
                 Glide.with(root.context).load(story.photoUrl).into(binding.ivItemPhoto)

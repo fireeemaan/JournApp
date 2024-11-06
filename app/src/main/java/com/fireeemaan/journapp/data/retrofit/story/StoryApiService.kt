@@ -1,5 +1,6 @@
 package com.fireeemaan.journapp.data.retrofit.story
 
+import com.fireeemaan.journapp.data.response.AddStoryResponse
 import com.fireeemaan.journapp.data.response.DetailStoryResponse
 import com.fireeemaan.journapp.data.response.StoriesResponse
 import okhttp3.MultipartBody
@@ -25,5 +26,5 @@ interface StoryApiService {
     suspend fun addStory(
         @Part photo: MultipartBody.Part,
         @Part("description") description: RequestBody
-    )
+    ): Response<AddStoryResponse>
 }
