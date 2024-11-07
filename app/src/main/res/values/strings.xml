@@ -9,6 +9,8 @@
     <string name="register_text">Register</string>
     <string name="to_register_text">Don\'t have an account? <b>Register Now!</b> </string>
     <string name="to_login_text">Already have an account? <b>Login Now!</b></string>
+    <string name="register_now">Register Now!</string>
+    <string name="login_now">Login Now!</string>
     <string name="story_image">Story Image</string>
     <string name="name">Name</string>
     <string name="item_description">Item Description</string>
@@ -32,4 +34,8 @@
         <item>English</item>
         <item>Indonesia</item>
     </string-array>
+    <string name="appwidget_text" translatable="false">Journ App</string>
+    <string name="empty_text">NO DATA</string>
+    <string name="add_widget" translatable="false">Add widget</string>
+    <string name="app_widget_description" translatable="false">This is an app widget description</string>
 </resources>

@@ -70,8 +70,8 @@ class LoginFragment : Fragment() {
 
         val spannableString = SpannableString(tvToRegister.text)
 
-        val start = tvToRegister.text.indexOf("Register Now!")
-        val end = start + "Register Now!".length
+        val start = tvToRegister.text.indexOf(getString(R.string.register_now))
+        val end = start + getString(R.string.register_now).length
 
         val clickableSpan = object : ClickableSpan() {
             override fun onClick(widget: View) {

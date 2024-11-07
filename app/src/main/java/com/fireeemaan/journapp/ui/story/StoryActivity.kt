@@ -13,12 +13,14 @@ import androidx.appcompat.view.menu.MenuBuilder
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.fireeemaan.journapp.R
 import com.fireeemaan.journapp.data.datastore.TokenDataStore
 import com.fireeemaan.journapp.data.datastore.dataStore
 import com.fireeemaan.journapp.databinding.ActivityStoryBinding
 import com.fireeemaan.journapp.ui.main.MainActivity
 import com.fireeemaan.journapp.ui.story.add.AddStoryViewModel
+import com.fireeemaan.journapp.ui.story.list.ListStoryFragmentDirections
 import kotlin.math.log
 
 class StoryActivity : AppCompatActivity() {
@@ -39,11 +41,15 @@ class StoryActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
-        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                finish()
-            }
-        })
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
+        val navController = navHostFragment?.findNavController()
+
+        val storyId = intent.getStringExtra("story_id")
+        if (storyId != null) {
+            val action =
+                ListStoryFragmentDirections.actionListStoryFragmentToDetailStoryFragment(storyId)
+            navController?.navigate(action)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
