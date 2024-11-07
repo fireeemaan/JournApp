@@ -15,6 +15,9 @@
             app:destination="@id/detailStoryFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_listStoryFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailStoryFragment"
@@ -29,5 +32,14 @@
         <argument
             android:name="storyId"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.fireeemaan.journapp.ui.settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings">
+        <action
+            android:id="@+id/action_settingsFragment_to_listStoryFragment"
+            app:destination="@id/listStoryFragment" />
     </fragment>
 </navigation>

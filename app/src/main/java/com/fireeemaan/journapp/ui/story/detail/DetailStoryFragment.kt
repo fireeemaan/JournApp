@@ -20,6 +20,7 @@ import com.fireeemaan.journapp.database.story.StoryEntity
 import com.fireeemaan.journapp.databinding.FragmentDetailStoryBinding
 import com.fireeemaan.journapp.ui.story.StoryViewModelFactory
 import com.fireeemaan.journapp.data.Result
+import com.fireeemaan.journapp.utils.Utils.formatDateTime
 
 class DetailStoryFragment : Fragment() {
 
@@ -54,6 +55,7 @@ class DetailStoryFragment : Fragment() {
         imgStory = binding.ivDetailPhoto
         tvName = binding.tvDetailName
         tvDescription = binding.tvDetailDescription
+
         tvDate = binding.tvDetailDate
 
         showLoading(true)
@@ -92,7 +94,7 @@ class DetailStoryFragment : Fragment() {
     private fun loadData(story: StoryEntity) {
         tvName.text = story.name
         tvDescription.text = story.description
-        tvDate.text = story.createdAt
+        tvDate.text = formatDateTime(story.createdAt)
 
         Glide.with(this)
             .load(story.photoUrl)

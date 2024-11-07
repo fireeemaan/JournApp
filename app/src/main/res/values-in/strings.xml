@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">JournApp</string>
+    <string name="error_password">Kata sandi harus terdiri dari minimal 8 karakter.</string>
+    <string name="error_email">Harap masukkan alamat email yang valid. (contoh: email@example.org)</string>
+    <string name="email_text">Email</string>
+    <string name="password_text">Kata Sandi</string>
+    <string name="login_text">Masuk</string>
+    <string name="name_text">Nama</string>
+    <string name="register_text">Daftar</string>
+    <string name="to_register_text">Belum punya akun? <b>Daftar Sekarang!</b></string>
+    <string name="to_login_text">Sudah punya akun? <b>Masuk Sekarang!</b></string>
+    <string name="story_image">Gambar Cerita</string>
+    <string name="name">Nama</string>
+    <string name="item_description">Deskripsi Item</string>
+    <string name="time_and_date">Waktu dan Tanggal</string>
+    <string name="add_story_button">Tambah Cerita</string>
+    <string name="gallery">Galeri</string>
+    <string name="take_photo">Ambil Foto</string>
+    <string name="describe_your_journey">Ceritakan perjalananmu!</string>
+    <string name="send_your_journey">Kirim Perjalananmu</string>
+    <string name="settings">Pengaturan</string>
+    <string name="logout">Keluar</string>
+    <string name="logout_message">Apakah Anda yakin ingin keluar?</string>
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
+    <string name="language">Bahasa</string>
+    <string name="restart">Mulai Ulang</string>
+    <string name="restart_title">Mulai Ulang Diperlukan</string>
+    <string name="restart_message">Aplikasi perlu dimulai ulang agar perubahan dapat diterapkan.</string>
+    <string name="cancel">Batal</string>
+
+</resources>

@@ -18,6 +18,7 @@ import android.view.Surface
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -35,6 +36,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.fireeemaan.journapp.R
 import com.fireeemaan.journapp.databinding.ActivityCameraBinding
 import com.fireeemaan.journapp.ui.button.JournButton
+import com.fireeemaan.journapp.ui.story.StoryActivity
 import com.fireeemaan.journapp.ui.story.add.AddStoryActivity
 import com.fireeemaan.journapp.utils.Utils.compressImage
 import java.io.ByteArrayOutputStream
@@ -138,8 +140,16 @@ class CameraActivity : AppCompatActivity() {
             startGallery()
         }
 
-
         cameraExecutor = Executors.newSingleThreadExecutor()
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                intent = Intent(this@CameraActivity, StoryActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+
+        })
     }
 
     override fun onResume() {

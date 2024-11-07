@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.menu.MenuBuilder
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.navigation.findNavController
 import com.fireeemaan.journapp.R
 import com.fireeemaan.journapp.data.datastore.TokenDataStore
 import com.fireeemaan.journapp.data.datastore.dataStore
@@ -57,6 +58,8 @@ class StoryActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_settings -> {
+                findNavController(R.id.nav_host_fragment)
+                    .navigate(R.id.action_listStoryFragment_to_settingsFragment)
                 true
             }
 
@@ -71,13 +74,13 @@ class StoryActivity : AppCompatActivity() {
 
     private fun confirmLogout() {
         AlertDialog.Builder(this)
-            .setTitle("Logout")
-            .setMessage("Are you sure you want to logout?")
-            .setPositiveButton("Yes") { dialog, _ ->
+            .setTitle(R.string.logout)
+            .setMessage(R.string.logout_message)
+            .setPositiveButton(R.string.yes) { dialog, _ ->
                 dialog.dismiss()
                 logout()
             }
-            .setNegativeButton("No") { dialog, _ ->
+            .setNegativeButton(R.string.no) { dialog, _ ->
                 dialog.dismiss()
             }
             .show()
