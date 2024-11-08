@@ -25,12 +25,9 @@
     <string name="yes">Ya</string>
     <string name="no">Tidak</string>
     <string name="language">Bahasa</string>
-    <string name="restart">Mulai Ulang</string>
-    <string name="restart_title">Mulai Ulang Diperlukan</string>
-    <string name="restart_message">Aplikasi perlu dimulai ulang agar perubahan dapat diterapkan.</string>
-    <string name="cancel">Batal</string>
     <string name="register_now">Daftar Sekarang!</string>
     <string name="login_now">Daftar Sekarang!</string>
     <string name="empty_text">TIDAK ADA DATA</string>
+    <string name="widget_image">Widget Image</string>
 
 </resources>

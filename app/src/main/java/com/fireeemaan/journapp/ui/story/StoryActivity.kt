@@ -4,14 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.activity.OnBackPressedCallback
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.view.menu.MenuBuilder
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.fireeemaan.journapp.R
@@ -19,9 +14,7 @@ import com.fireeemaan.journapp.data.datastore.TokenDataStore
 import com.fireeemaan.journapp.data.datastore.dataStore
 import com.fireeemaan.journapp.databinding.ActivityStoryBinding
 import com.fireeemaan.journapp.ui.main.MainActivity
-import com.fireeemaan.journapp.ui.story.add.AddStoryViewModel
 import com.fireeemaan.journapp.ui.story.list.ListStoryFragmentDirections
-import kotlin.math.log
 
 class StoryActivity : AppCompatActivity() {
 

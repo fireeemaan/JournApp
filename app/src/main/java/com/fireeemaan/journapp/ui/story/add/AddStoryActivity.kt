@@ -1,7 +1,6 @@
 package com.fireeemaan.journapp.ui.story.add
 
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
@@ -10,21 +9,21 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.fireeemaan.journapp.R
+import com.fireeemaan.journapp.data.Result
 import com.fireeemaan.journapp.data.datastore.TokenDataStore
 import com.fireeemaan.journapp.data.datastore.dataStore
 import com.fireeemaan.journapp.databinding.ActivityAddStoryBinding
 import com.fireeemaan.journapp.ui.button.JournButton
+import com.fireeemaan.journapp.ui.story.StoryActivity
 import com.fireeemaan.journapp.ui.story.StoryViewModelFactory
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.RequestBody.Companion.toRequestBody
+import com.fireeemaan.journapp.ui.story.camera.CameraActivity
 import com.fireeemaan.journapp.utils.Utils.uriToFile
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
-import com.fireeemaan.journapp.data.Result
-import com.fireeemaan.journapp.ui.story.StoryActivity
+import okhttp3.RequestBody.Companion.toRequestBody
 
 class AddStoryActivity : AppCompatActivity() {
 
@@ -65,6 +64,15 @@ class AddStoryActivity : AppCompatActivity() {
                 Toast.makeText(this, "Image not found.", Toast.LENGTH_SHORT).show()
             }
         }
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                intent = Intent(this@AddStoryActivity, CameraActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+
+        })
 
     }
 

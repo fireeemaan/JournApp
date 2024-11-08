@@ -8,23 +8,21 @@ import android.text.Spanned
 import android.text.TextWatcher
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.fireeemaan.journapp.R
+import com.fireeemaan.journapp.data.Result
 import com.fireeemaan.journapp.data.datastore.TokenDataStore
 import com.fireeemaan.journapp.data.datastore.dataStore
 import com.fireeemaan.journapp.databinding.FragmentLoginBinding
 import com.fireeemaan.journapp.ui.auth.AuthViewModelFactory
 import com.fireeemaan.journapp.ui.button.JournButton
-import com.fireeemaan.journapp.data.Result
 import com.fireeemaan.journapp.ui.edittext.JournEditText
 import com.fireeemaan.journapp.ui.story.StoryActivity
 

@@ -90,7 +90,6 @@ internal class StackRemoteViewsFactory(
     }
 
     companion object {
-        const val WIDGET_PREF = "widget_pref"
     }
 
 }

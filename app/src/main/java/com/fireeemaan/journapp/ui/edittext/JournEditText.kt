@@ -1,7 +1,6 @@
 package com.fireeemaan.journapp.ui.edittext
 
 import android.content.Context
-import android.graphics.Canvas
 import android.text.InputType
 import android.util.AttributeSet
 import android.util.Patterns
@@ -78,7 +77,7 @@ class JournEditText @JvmOverloads constructor(
     }
 
     private fun checkPassword(password: String) {
-        error = if (password.length <= 8) {
+        error = if (password.length < 8) {
             context.getString(R.string.error_password)
         } else {
             null

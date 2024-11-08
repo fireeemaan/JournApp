@@ -17,13 +17,9 @@ lifecycleLivedataKtxVersion = "2.8.7"
 loggingInterceptor = "4.12.0"
 material = "1.12.0"
 constraintlayout = "2.1.4"
-lifecycleLivedataKtx = "2.8.6"
-lifecycleViewmodelKtx = "2.8.6"
 #noinspection GradleDependency
-navigationFragmentKtx = "2.8.2"
 #noinspection GradleDependency
 navigationFragmentKtxVersion = "2.8.3"
-navigationUiKtx = "2.8.2"
 retrofit = "2.11.0"
 #noinspection GradleDependency
 activity = "1.9.2"
@@ -36,6 +32,7 @@ swiperefreshlayout = "1.1.0"
 workRuntime = "2.9.1"
 legacySupportV4 = "1.0.0"
 fragmentKtx = "1.8.4"
+roomPaging = "2.4.0-rc01"
 
 [libraries]
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activityKtx" }
@@ -72,6 +69,7 @@ androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
 androidx-legacy-support-v4 = { group = "androidx.legacy", name = "legacy-support-v4", version.ref = "legacySupportV4" }
 androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragmentKtx" }
+androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "roomPaging" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -1,10 +1,8 @@
 package com.fireeemaan.journapp.widget
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.fireeemaan.journapp.data.retrofit.story.StoryApiConfig
 import com.fireeemaan.journapp.database.story.StoryEntity
-import kotlinx.coroutines.launch
 
 class WidgetViewModel : ViewModel() {
     suspend fun getStories(token: String): List<StoryEntity>? {

@@ -5,12 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.fireeemaan.journapp.data.Result
+import com.fireeemaan.journapp.data.datastore.TokenDataStore
 import com.fireeemaan.journapp.data.repository.AuthRepository
 import com.fireeemaan.journapp.data.response.LoginResponse
 import kotlinx.coroutines.launch
-import com.fireeemaan.journapp.data.Result
-import com.fireeemaan.journapp.data.datastore.TokenDataStore
-import com.fireeemaan.journapp.ui.auth.AuthViewModelFactory
 
 class LoginViewModel(
     private val authRepository: AuthRepository,

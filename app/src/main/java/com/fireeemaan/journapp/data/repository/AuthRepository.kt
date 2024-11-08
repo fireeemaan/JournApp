@@ -1,11 +1,10 @@
 package com.fireeemaan.journapp.data.repository
 
-import android.util.Log
+import com.fireeemaan.journapp.data.Result
+import com.fireeemaan.journapp.data.response.ErrorResponse
 import com.fireeemaan.journapp.data.response.LoginResponse
 import com.fireeemaan.journapp.data.response.RegisterResponse
 import com.fireeemaan.journapp.data.retrofit.auth.AuthApiService
-import com.fireeemaan.journapp.data.Result
-import com.fireeemaan.journapp.data.response.ErrorResponse
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 

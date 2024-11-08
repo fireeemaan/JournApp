@@ -26,16 +26,9 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="language">Language</string>
-    <string name="restart">Restart</string>
-    <string name="restart_title">Restart Required</string>
-    <string name="restart_message">The app needs to be restarted for the changes to take effect.</string>
-    <string name="cancel">Cancel</string>
-    <string-array name="lang_list">
-        <item>English</item>
-        <item>Indonesia</item>
-    </string-array>
+
     <string name="appwidget_text" translatable="false">Journ App</string>
     <string name="empty_text">NO DATA</string>
-    <string name="add_widget" translatable="false">Add widget</string>
     <string name="app_widget_description" translatable="false">This is an app widget description</string>
+    <string name="widget_image">Widget Image</string>
 </resources>

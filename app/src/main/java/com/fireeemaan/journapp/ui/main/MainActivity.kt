@@ -1,16 +1,10 @@
 package com.fireeemaan.journapp.ui.main
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.fireeemaan.journapp.R
 import com.fireeemaan.journapp.databinding.ActivityMainBinding
-import com.fireeemaan.journapp.ui.edittext.JournEditText
 
 class MainActivity : AppCompatActivity() {
 

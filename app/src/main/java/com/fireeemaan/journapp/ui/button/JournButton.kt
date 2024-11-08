@@ -1,7 +1,7 @@
 package com.fireeemaan.journapp.ui.button
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.MotionEvent
@@ -19,8 +19,6 @@ class JournButton : AppCompatButton {
     private var disabledBackground: Drawable =
         ContextCompat.getDrawable(context, R.drawable.button_disabled) as Drawable
 
-
-    private var loading: Boolean = false
 
     init {
         updateButtonState()
@@ -44,6 +42,7 @@ class JournButton : AppCompatButton {
         setTextColor(textColor)
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         if (!isEnabled) return false
 

@@ -21,7 +21,7 @@ class AuthViewModelFactory private constructor(
             }
 
             modelClass.isAssignableFrom(RegisterViewModel::class.java) -> {
-                RegisterViewModel(authRepository, authPref) as T
+                RegisterViewModel(authRepository) as T
             }
 
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")

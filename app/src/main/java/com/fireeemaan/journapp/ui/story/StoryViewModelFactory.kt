@@ -20,7 +20,7 @@ class StoryViewModelFactory private constructor(
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
             modelClass.isAssignableFrom(ListStoryViewModel::class.java) -> {
-                ListStoryViewModel(storyRepository, authPref) as T
+                ListStoryViewModel(storyRepository) as T
             }
 
             modelClass.isAssignableFrom(DetailStoryViewModel::class.java) -> {

@@ -1,50 +1,37 @@
 package com.fireeemaan.journapp.ui.story.camera
 
 import android.Manifest
-import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.provider.MediaStore
 import android.util.Log
 import android.view.OrientationEventListener
 import android.view.Surface
 import android.view.View
-import android.widget.Button
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
-import androidx.camera.core.ImageProxy
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.fireeemaan.journapp.R
 import com.fireeemaan.journapp.databinding.ActivityCameraBinding
 import com.fireeemaan.journapp.ui.button.JournButton
 import com.fireeemaan.journapp.ui.story.StoryActivity
 import com.fireeemaan.journapp.ui.story.add.AddStoryActivity
 import com.fireeemaan.journapp.utils.Utils.compressImage
-import java.io.ByteArrayOutputStream
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
 import com.fireeemaan.journapp.utils.Utils.createCustomTempFile
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import java.util.concurrent.TimeUnit
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
 class CameraActivity : AppCompatActivity() {
 
