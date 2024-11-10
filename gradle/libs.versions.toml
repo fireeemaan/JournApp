@@ -7,6 +7,7 @@ datastorePreferences = "1.1.1"
 glide = "4.16.0"
 #noinspection GradleDependency
 kotlin = "1.9.0"
+#noinspection GradleDependency
 coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -16,6 +17,7 @@ kotlinxCoroutinesCore = "1.9.0"
 lifecycleLivedataKtxVersion = "2.8.7"
 loggingInterceptor = "4.12.0"
 material = "1.12.0"
+#noinspection GradleDependency
 constraintlayout = "2.1.4"
 #noinspection GradleDependency
 #noinspection GradleDependency
@@ -30,13 +32,29 @@ roomKtx = "2.6.1"
 #noinspection GradleDependency
 roomRuntime = "2.5.2"
 swiperefreshlayout = "1.1.0"
+#noinspection GradleDependency
 workRuntime = "2.9.1"
 legacySupportV4 = "1.0.0"
+#noinspection GradleDependency
 fragmentKtx = "1.8.4"
+#noinspection GradleDependency
 roomPaging = "2.4.0-rc01"
+#noinspection GradleDependency
 pagingRuntimeKtx = "3.1.0"
 googleAndroidLibrariesMapsplatformSecretsGradlePlugin = "2.0.1"
+#noinspection GradleDependency
 playServicesMaps = "18.1.0"
+espressoIntents = "3.6.1"
+#noinspection GradleDependency
+junitJunit = "4.12"
+espressoIdlingResource = "3.6.1"
+#noinspection GradleDependency
+fragmentTesting = "1.4.1"
+coreTesting = "2.2.0"
+#noinspection GradleDependency
+kotlinxCoroutinesTest = "1.6.4"
+mockitoCore = "5.6.0"
+mockitoInline = "5.2.0"
 
 [libraries]
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activityKtx" }
@@ -77,6 +95,15 @@ androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", ve
 androidx-room-paging = { module = "androidx.room:room-paging", version.ref = "roomPaging" }
 androidx-paging-runtime-ktx = { module = "androidx.paging:paging-runtime-ktx", version.ref = "pagingRuntimeKtx" }
 play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServicesMaps" }
+espresso-intents = { module = "androidx.test.espresso:espresso-intents", version.ref = "espressoIntents" }
+junit-junit = { group = "junit", name = "junit", version.ref = "junitJunit" }
+androidx-espresso-idling-resource = { group = "androidx.test.espresso", name = "espresso-idling-resource", version.ref = "espressoIdlingResource" }
+androidx-espresso-contrib = { module = "androidx.test.espresso:espresso-contrib", version.ref = "espressoCore" }
+androidx-fragment-testing = { module = "androidx.fragment:fragment-testing", version.ref = "fragmentTesting" }
+androidx-core-testing = { module = "androidx.arch.core:core-testing", version.ref = "coreTesting" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
+mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockitoCore" }
+mockito-inline = { module = "org.mockito:mockito-inline", version.ref = "mockitoInline" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

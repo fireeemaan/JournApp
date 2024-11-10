@@ -38,7 +38,6 @@ class RegisterFragment : Fragment() {
 
     private val registerViewModel: RegisterViewModel by viewModels {
         AuthViewModelFactory.getInstance(
-            requireContext(),
             TokenDataStore.getInstance(requireContext().applicationContext.dataStore)
         )
     }

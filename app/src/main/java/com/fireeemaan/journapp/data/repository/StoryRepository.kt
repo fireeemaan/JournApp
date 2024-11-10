@@ -2,24 +2,23 @@ package com.fireeemaan.journapp.data.repository
 
 import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.liveData
-import com.fireeemaan.journapp.data.retrofit.story.StoryApiService
-import com.fireeemaan.journapp.database.story.StoryDao
-import com.fireeemaan.journapp.database.story.StoryEntity
-import kotlinx.coroutines.Dispatchers
 import com.fireeemaan.journapp.data.Result
 import com.fireeemaan.journapp.data.remotemediator.StoryRemoteMediator
 import com.fireeemaan.journapp.data.response.AddStoryResponse
 import com.fireeemaan.journapp.data.response.ErrorResponse
+import com.fireeemaan.journapp.data.retrofit.story.StoryApiService
+import com.fireeemaan.journapp.database.story.StoryDao
 import com.fireeemaan.journapp.database.story.StoryDatabase
+import com.fireeemaan.journapp.database.story.StoryEntity
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import kotlinx.coroutines.Dispatchers
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 
@@ -108,7 +107,7 @@ class StoryRepository private constructor(
                 }
                 Result.Error("Error: ${errorResponse?.message}")
             }
-            
+
         } catch (e: Exception) {
             Log.e("StoryRepository", "postStoryCatch: ${e.message}")
             Result.Error("Unexpected Error : ${e.message}")

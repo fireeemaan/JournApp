@@ -25,6 +25,7 @@ data class StoriesResponse(
     val message: String
 )
 
+@Suppress("unused")
 data class DetailStoryResponse(
 
     @field:SerializedName("error")

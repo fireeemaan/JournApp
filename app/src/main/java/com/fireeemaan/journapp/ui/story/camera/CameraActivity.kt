@@ -201,7 +201,7 @@ class CameraActivity : AppCompatActivity() {
 
 
                 override fun onError(exception: ImageCaptureException) {
-                    Log.e("Kamera", "Error: ${exception.message}")
+                    Log.e("Camera", "Error: ${exception.message}")
                 }
             })
     }

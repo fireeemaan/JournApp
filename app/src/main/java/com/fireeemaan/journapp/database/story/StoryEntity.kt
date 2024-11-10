@@ -22,9 +22,10 @@ data class StoryEntity(
     @ColumnInfo("description")
     val description: String,
 
+    @ColumnInfo("lat")
+    val lat: Double? = null,
+
     @ColumnInfo("lon")
     val lon: Double? = null,
 
-    @ColumnInfo("lat")
-    val lat: Double? = null
-)
+    )

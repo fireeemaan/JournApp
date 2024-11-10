@@ -8,7 +8,6 @@ import android.text.Spanned
 import android.text.TextWatcher
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,7 +38,6 @@ class LoginFragment : Fragment() {
 
     private val loginViewModel: LoginViewModel by viewModels {
         AuthViewModelFactory.getInstance(
-            requireContext(),
             TokenDataStore.getInstance(requireContext().applicationContext.dataStore)
         )
     }
@@ -55,7 +53,6 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        checkLoginStatus()
 
         tvToRegister = binding.tvToRegister
         edPassword = binding.edLoginPassword
@@ -66,6 +63,7 @@ class LoginFragment : Fragment() {
         edEmail.inputMode = JournEditText.InputMode.EMAIL
 
         setButtonState(isEnabled = false)
+        checkLoginStatus()
 
         val spannableString = SpannableString(tvToRegister.text)
 
@@ -85,6 +83,25 @@ class LoginFragment : Fragment() {
         edEmail.addTextChangedListener(createTextWatcher())
         edPassword.addTextChangedListener(createTextWatcher())
 
+
+
+        btnLogin.setOnClickListener {
+            setButtonState(isEnabled = false, isLoading = true)
+
+            val email = edEmail.text.toString()
+            val password = edPassword.text.toString()
+
+            if (email.isEmpty() || password.isEmpty()) {
+                setButtonState(isEnabled = false)
+            } else {
+                observeLogin(email, password)
+            }
+        }
+
+    }
+
+    private fun observeLogin(email: String, password: String) {
+        loginViewModel.login(email, password)
         loginViewModel.loginResult.observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Result.Loading -> {
@@ -107,18 +124,6 @@ class LoginFragment : Fragment() {
             }
         }
 
-        btnLogin.setOnClickListener {
-            setButtonState(isEnabled = false, isLoading = true)
-
-            val email = edEmail.text.toString()
-            val password = edPassword.text.toString()
-
-            if (email.isEmpty() || password.isEmpty()) {
-                setButtonState(isEnabled = false)
-            } else {
-                loginViewModel.login(email, password)
-            }
-        }
 
     }
 
@@ -139,7 +144,6 @@ class LoginFragment : Fragment() {
     private fun checkLoginStatus() {
         loginViewModel.getAuthToken().observe(viewLifecycleOwner) { token ->
             if (token.isNotEmpty()) {
-                Log.e("TOKEN", "Token: $token ")
                 val intent = Intent(requireContext(), StoryActivity::class.java)
                 startActivity(intent)
                 requireActivity().finish()

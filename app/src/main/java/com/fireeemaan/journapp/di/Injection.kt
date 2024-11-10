@@ -15,7 +15,8 @@ object Injection {
         return StoryRepository.getInstance(storyApiService, dao, database)
     }
 
-    fun provideAuthRepository(context: Context): AuthRepository {
+    @Suppress("unused")
+    fun provideAuthRepository(): AuthRepository {
         val authApiService = AuthApiConfig.getApiService()
         return AuthRepository.getInstance(authApiService)
     }

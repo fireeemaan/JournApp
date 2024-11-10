@@ -16,6 +16,7 @@ import com.fireeemaan.journapp.databinding.ActivityStoryBinding
 import com.fireeemaan.journapp.ui.main.MainActivity
 import com.fireeemaan.journapp.ui.maps.MapsActivity
 import com.fireeemaan.journapp.ui.story.list.ListStoryFragmentDirections
+import com.fireeemaan.journapp.utils.EspressoIdlingResource.wrapEspressoIdlingResource
 
 class StoryActivity : AppCompatActivity() {
 
@@ -49,10 +50,6 @@ class StoryActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
         return true
-    }
-
-    override fun onMenuOpened(featureId: Int, menu: Menu): Boolean {
-        return super.onMenuOpened(featureId, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -93,10 +90,11 @@ class StoryActivity : AppCompatActivity() {
     }
 
     private fun logout() {
-        viewModel.clearToken()
-
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
-        finish()
+        wrapEspressoIdlingResource {
+            viewModel.clearToken()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 }

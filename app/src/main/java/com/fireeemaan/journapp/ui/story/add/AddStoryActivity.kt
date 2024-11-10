@@ -2,7 +2,6 @@ package com.fireeemaan.journapp.ui.story.add
 
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.location.Location
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
@@ -26,7 +25,6 @@ import com.fireeemaan.journapp.ui.story.camera.CameraActivity
 import com.fireeemaan.journapp.utils.Utils.uriToFile
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.material.switchmaterial.SwitchMaterial
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody

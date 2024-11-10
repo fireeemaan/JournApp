@@ -31,9 +31,9 @@ class AuthViewModelFactory private constructor(
     companion object {
         @Volatile
         private var instance: AuthViewModelFactory? = null
-        fun getInstance(context: Context, authPref: TokenDataStore): AuthViewModelFactory =
+        fun getInstance(authPref: TokenDataStore): AuthViewModelFactory =
             instance ?: synchronized(this) {
-                val authRepository = Injection.provideAuthRepository(context)
+                val authRepository = Injection.provideAuthRepository()
                 instance ?: AuthViewModelFactory(authRepository, authPref)
             }.also { instance = it }
     }

@@ -89,7 +89,5 @@ internal class StackRemoteViewsFactory(
 
     }
 
-    companion object {
-    }
 
 }

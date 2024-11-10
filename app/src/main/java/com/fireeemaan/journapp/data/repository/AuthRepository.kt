@@ -5,18 +5,22 @@ import com.fireeemaan.journapp.data.response.ErrorResponse
 import com.fireeemaan.journapp.data.response.LoginResponse
 import com.fireeemaan.journapp.data.response.RegisterResponse
 import com.fireeemaan.journapp.data.retrofit.auth.AuthApiService
+import com.fireeemaan.journapp.utils.EspressoIdlingResource.countingIdlingResource
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
 class AuthRepository(private val authApiService: AuthApiService) {
     suspend fun login(email: String, password: String): Result<LoginResponse> {
         return try {
+            countingIdlingResource.increment()
             val response = authApiService.login(email, password)
             if (response.isSuccessful) {
+                countingIdlingResource.decrement()
                 response.body()?.let { loginResponse ->
                     Result.Success(loginResponse)
                 } ?: Result.Error("Empty Response")
             } else {
+                countingIdlingResource.decrement()
                 val type = object : TypeToken<ErrorResponse>() {}.type
                 val errorResponse: ErrorResponse? =
                     Gson().fromJson(response.errorBody()?.charStream(), type)
@@ -25,6 +29,8 @@ class AuthRepository(private val authApiService: AuthApiService) {
         } catch (e: Exception) {
             Result.Error("Something went wrong.")
         }
+
+
     }
 
     suspend fun register(

@@ -11,6 +11,6 @@ import com.fireeemaan.journapp.database.story.StoryEntity
 class ListStoryViewModel(
     private val storyRepository: StoryRepository,
 ) : ViewModel() {
-    val quote: LiveData<PagingData<StoryEntity>> =
+    val story: LiveData<PagingData<StoryEntity>> =
         storyRepository.getAllStories().cachedIn(viewModelScope)
 }
