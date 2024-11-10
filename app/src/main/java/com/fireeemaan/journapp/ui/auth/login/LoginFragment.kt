@@ -8,6 +8,7 @@ import android.text.Spanned
 import android.text.TextWatcher
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -138,6 +139,7 @@ class LoginFragment : Fragment() {
     private fun checkLoginStatus() {
         loginViewModel.getAuthToken().observe(viewLifecycleOwner) { token ->
             if (token.isNotEmpty()) {
+                Log.e("TOKEN", "Token: $token ")
                 val intent = Intent(requireContext(), StoryActivity::class.java)
                 startActivity(intent)
                 requireActivity().finish()

@@ -12,7 +12,7 @@ object Injection {
         val storyApiService = StoryApiConfig.getApiService(token)
         val database = StoryDatabase.getDatabase(context)
         val dao = database.storyDao()
-        return StoryRepository.getInstance(storyApiService, dao)
+        return StoryRepository.getInstance(storyApiService, dao, database)
     }
 
     fun provideAuthRepository(context: Context): AuthRepository {

@@ -1,5 +1,6 @@
 package com.fireeemaan.journapp.database.story
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -11,7 +12,7 @@ interface StoryDao {
     suspend fun insert(event: List<StoryEntity>)
 
     @Query("SELECT * FROM story")
-    suspend fun getAllStories(): List<StoryEntity>
+    fun getAllStories(): PagingSource<Int, StoryEntity>
 
     @Query("SELECT * FROM story WHERE id = :id")
     suspend fun getStoryById(id: String): StoryEntity?

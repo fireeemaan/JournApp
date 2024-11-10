@@ -4,6 +4,7 @@ plugins {
     id("kotlin-parcelize")
     id("com.google.devtools.ksp")
     id("androidx.navigation.safeargs.kotlin")
+    alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
 }
 
 android {
@@ -44,6 +45,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+        freeCompilerArgs += listOf("-Xopt-in=kotlin.RequiresOptIn")
     }
 }
 
@@ -63,6 +65,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.legacy.support.v4)
     implementation(libs.androidx.fragment.ktx)
+    implementation(libs.play.services.maps)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -88,4 +91,7 @@ dependencies {
     ksp(libs.room.compiler)
 
     implementation(libs.androidx.room.paging)
+    implementation(libs.androidx.paging.runtime.ktx)
+
+    implementation(libs.play.services.location)
 }

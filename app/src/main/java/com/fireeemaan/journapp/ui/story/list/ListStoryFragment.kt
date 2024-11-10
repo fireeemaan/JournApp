@@ -20,6 +20,7 @@ import com.fireeemaan.journapp.data.datastore.dataStore
 import com.fireeemaan.journapp.database.story.StoryEntity
 import com.fireeemaan.journapp.databinding.FragmentListStoryBinding
 import com.fireeemaan.journapp.ui.adapter.ListStoryAdapter
+import com.fireeemaan.journapp.ui.adapter.LoadingStateAdapter
 import com.fireeemaan.journapp.ui.story.StoryViewModelFactory
 import com.fireeemaan.journapp.ui.story.camera.CameraActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -28,7 +29,6 @@ class ListStoryFragment : Fragment() {
 
     private lateinit var storyRecyclerView: RecyclerView
     private lateinit var storyAdapter: ListStoryAdapter
-    private lateinit var progressBar: ProgressBar
     private lateinit var fabAddStory: FloatingActionButton
 
     private var _binding: FragmentListStoryBinding? = null
@@ -53,7 +53,6 @@ class ListStoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        progressBar = binding.progressBar
         fabAddStory = binding.fabAddStory
 
         (activity as? AppCompatActivity)?.supportActionBar?.show()
@@ -64,7 +63,11 @@ class ListStoryFragment : Fragment() {
             findNavController().navigate(action)
         }
         storyRecyclerView = binding.storyRecyclerView
-        storyRecyclerView.adapter = storyAdapter
+        storyRecyclerView.adapter = storyAdapter.withLoadStateFooter(
+            footer = LoadingStateAdapter {
+                storyAdapter.retry()
+            }
+        )
 
         storyRecyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -83,50 +86,18 @@ class ListStoryFragment : Fragment() {
                 }
             })
 
-        showLoading(true)
+//        showLoading(true)
         observeData()
-    }
-
-    private fun observeData() {
-        viewModel.getAllStories().observe(viewLifecycleOwner) { result ->
-            when (result) {
-                is Result.Loading -> {
-                    showLoading(true)
-                }
-
-                is Result.Success -> {
-                    showLoading(false)
-                    setData(result.data)
-                }
-
-                is Result.Error -> {
-                    showLoading(false)
-                    Toast.makeText(context, "Error: ${result.error}", Toast.LENGTH_SHORT).show()
-                    setData(emptyList())
-                }
-            }
-        }
     }
 
     override fun onResume() {
         super.onResume()
-
         (activity as? AppCompatActivity)?.supportActionBar?.show()
+    }
 
-        viewModel.getAllStories().observe(viewLifecycleOwner) { result ->
-            when (result) {
-                is Result.Loading -> showLoading(true)
-                is Result.Success -> {
-                    showLoading(false)
-                    setData(result.data)
-                }
-
-                is Result.Error -> {
-                    showLoading(false)
-                    Toast.makeText(context, "Error: ${result.error}", Toast.LENGTH_SHORT).show()
-                    setData(emptyList())
-                }
-            }
+    private fun observeData() {
+        viewModel.quote.observe(viewLifecycleOwner) {
+            storyAdapter.submitData(lifecycle, it)
         }
     }
 
@@ -135,11 +106,4 @@ class ListStoryFragment : Fragment() {
         (activity as? AppCompatActivity)?.supportActionBar?.hide()
     }
 
-    private fun showLoading(isLoading: Boolean) {
-        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-    }
-
-    private fun setData(listStory: List<StoryEntity>) {
-        storyAdapter.submitList(listStory)
-    }
 }

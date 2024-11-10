@@ -17,10 +17,15 @@ class AddStoryViewModel(
     private val _addStoryResponse = MutableLiveData<Result<AddStoryResponse>>()
     val addStoryResponse: LiveData<Result<AddStoryResponse>> get() = _addStoryResponse
 
-    fun addStory(photoUrl: MultipartBody.Part, description: RequestBody) {
+    fun addStory(
+        photoUrl: MultipartBody.Part,
+        description: RequestBody,
+        lat: RequestBody? = null,
+        lon: RequestBody? = null
+    ) {
         viewModelScope.launch {
             _addStoryResponse.postValue(Result.Loading)
-            val result = storyRepository.postStory(photoUrl, description)
+            val result = storyRepository.postStory(photoUrl, description, lat, lon)
             _addStoryResponse.postValue(result)
         }
     }

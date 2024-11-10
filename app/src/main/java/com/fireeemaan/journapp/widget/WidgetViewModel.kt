@@ -5,9 +5,13 @@ import com.fireeemaan.journapp.data.retrofit.story.StoryApiConfig
 import com.fireeemaan.journapp.database.story.StoryEntity
 
 class WidgetViewModel : ViewModel() {
+
+    private var page: Int = 1
+    private var size: Int = 5
+
     suspend fun getStories(token: String): List<StoryEntity>? {
         return try {
-            val response = StoryApiConfig.getApiService(token).getStories()
+            val response = StoryApiConfig.getApiService(token).getStories(page, size)
             if (response.isSuccessful) {
                 response.body()?.listStory?.map { listStoryItem ->
                     StoryEntity(

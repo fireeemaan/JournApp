@@ -48,7 +48,6 @@
                 android:layout_height="wrap_content"
                 android:padding="8dp">
 
-
                 <EditText
                     android:id="@+id/ed_add_description"
                     style="@style/Detail.SupportingText"
@@ -68,14 +67,24 @@
 
         </androidx.cardview.widget.CardView>
 
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/sw_location"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/share_location"
+            app:layout_constraintEnd_toEndOf="@+id/text_card"
+            app:layout_constraintStart_toStartOf="@+id/text_card"
+            app:layout_constraintTop_toBottomOf="@id/text_card" />
+
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/text_card"
             app:layout_constraintStart_toStartOf="@+id/text_card"
-            app:layout_constraintTop_toBottomOf="@id/text_card">
+            app:layout_constraintTop_toBottomOf="@id/sw_location">
 
             <ProgressBar
                 android:id="@+id/progress_bar"

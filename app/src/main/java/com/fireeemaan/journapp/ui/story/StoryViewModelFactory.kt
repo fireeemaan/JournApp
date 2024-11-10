@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.fireeemaan.journapp.data.datastore.TokenDataStore
 import com.fireeemaan.journapp.data.repository.StoryRepository
 import com.fireeemaan.journapp.di.Injection
+import com.fireeemaan.journapp.ui.maps.MapsViewModel
 import com.fireeemaan.journapp.ui.story.add.AddStoryViewModel
 import com.fireeemaan.journapp.ui.story.detail.DetailStoryViewModel
 import com.fireeemaan.journapp.ui.story.list.ListStoryViewModel
@@ -33,6 +34,10 @@ class StoryViewModelFactory private constructor(
 
             modelClass.isAssignableFrom(StoryViewModel::class.java) -> {
                 StoryViewModel(authPref) as T
+            }
+
+            modelClass.isAssignableFrom(MapsViewModel::class.java) -> {
+                MapsViewModel(storyRepository) as T
             }
 
             else -> throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")

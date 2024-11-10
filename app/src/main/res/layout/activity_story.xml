@@ -18,6 +18,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            android:theme="@style/ThemeOverlay.App.Toolbar"
             app:menu="@menu/menu"
             app:title="@string/app_name" />
     </com.google.android.material.appbar.AppBarLayout>

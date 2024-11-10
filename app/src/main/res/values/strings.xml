@@ -31,4 +31,9 @@
     <string name="empty_text">NO DATA</string>
     <string name="app_widget_description" translatable="false">This is an app widget description</string>
     <string name="widget_image">Widget Image</string>
+    <string name="retry">Retry</string>
+    <string name="title_activity_maps" translatable="false">MapsActivity</string>
+    <string name="maps" translatable="false">Maps</string>
+    <string name="marker_image" translatable="false">Marker Image</string>
+    <string name="share_location">Share Location</string>
 </resources>

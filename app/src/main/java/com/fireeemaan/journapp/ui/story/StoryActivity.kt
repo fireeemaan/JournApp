@@ -14,6 +14,7 @@ import com.fireeemaan.journapp.data.datastore.TokenDataStore
 import com.fireeemaan.journapp.data.datastore.dataStore
 import com.fireeemaan.journapp.databinding.ActivityStoryBinding
 import com.fireeemaan.journapp.ui.main.MainActivity
+import com.fireeemaan.journapp.ui.maps.MapsActivity
 import com.fireeemaan.journapp.ui.story.list.ListStoryFragmentDirections
 
 class StoryActivity : AppCompatActivity() {
@@ -64,6 +65,12 @@ class StoryActivity : AppCompatActivity() {
 
             R.id.action_logout -> {
                 confirmLogout()
+                true
+            }
+
+            R.id.action_map -> {
+                intent = Intent(this, MapsActivity::class.java)
+                startActivity(intent)
                 true
             }
 

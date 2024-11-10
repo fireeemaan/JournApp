@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -14,7 +15,7 @@ import com.fireeemaan.journapp.utils.Utils.formatDateTime
 
 class ListStoryAdapter(
     private val onItemClicked: (String) -> Unit
-) : ListAdapter<StoryEntity, ListStoryAdapter.ListViewHolder>(DIFF_CALLBACK) {
+) : PagingDataAdapter<StoryEntity, ListStoryAdapter.ListViewHolder>(DIFF_CALLBACK) {
     inner class ListViewHolder(private val binding: ItemListBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
@@ -62,7 +63,9 @@ class ListStoryAdapter(
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
         val story = getItem(position)
-        holder.bind(story)
+        if (story != null) {
+            holder.bind(story)
+        }
     }
 
     companion object {

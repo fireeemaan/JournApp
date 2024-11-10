@@ -50,6 +50,10 @@
         <item name="colorSurfaceContainerHighest">@color/md_theme_surfaceContainerHighest</item>
     </style>
 
+    <style name="ThemeOverlay.App.Toolbar" parent="ThemeOverlay.MaterialComponents.Toolbar.Primary">
+        <item name="colorOnPrimary">@color/md_theme_onPrimaryContainer</item>
+    </style>
+
     <!--    Base Text Style-->
     <style name="BaseTitle">
         <item name="android:textColor">@color/md_theme_onPrimaryContainer</item>
